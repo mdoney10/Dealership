@@ -12,7 +12,7 @@ class Technician(models.Model):
     employee_id = models.CharField(max_length=5)
 
 
-class Appointmenet(models.Model):
+class Appointment(models.Model):
     automobile_vin = models.CharField(max_length=50)
     customer = models.CharField(max_length=50)
     Appointment_date = models.DateField(blank=True)
