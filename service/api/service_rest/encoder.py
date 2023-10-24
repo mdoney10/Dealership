@@ -36,7 +36,7 @@ class AppointmentListEncoder(ModelEncoder):
         "id",
         "automobile_vin",
         "customer",
-        "Appointment_date",   # KEEP CAPS A
+        "appointment_date",   # KEEP CAPS A
         "appointment_time",
         "technician",
         "reason",
@@ -59,7 +59,7 @@ class AppointmentDetailEncoder(ModelEncoder):
     properties = [
         "automobile_vin",
         "customer",
-        "Appointment_date",   # KEEP CAPS A
+        "appointment_date",   # KEEP CAPS A
         "appointment_time",
         "technician",
         "reason",
