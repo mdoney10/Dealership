@@ -59,29 +59,45 @@ def api_technician_detail(request, id):
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request):
     if request.method == "GET":
-        appointments = Appointment.objects.all()
-        return JsonResponse(
-            {"appointments": appointments},
-            encoder=AppointmentListEncoder,
-            safe=False,
-        )
-    else:
         try:
-            content = json.loads(request.body)
-            employee_id = content["technician"]
-            technician = Technician.objects.get(employee_id=employee_id)
-            content["technician"] = technician
-            appointments = Appointment.objects.create(**content)
+            appointments = Appointment.objects.all()
             return JsonResponse(
-                appointments,
+                {"appointments": appointments},
                 encoder=AppointmentListEncoder,
                 safe=False,
             )
-        except Appointment.DoesNotExist:
-            response = JsonResponse
-            ({"message": "Could not create the appointment"})
-            response.status_code = 400
-            return response
+        except Exception as e:
+            return JsonResponse(
+                {"error": f"Could not retrieve appointments. Error: {str(e)}"},
+                status=500
+            )
+    elif request.method == "POST":
+        try:
+            content = json.loads(request.body)
+            technician_id = content["technician"]
+            technician = Technician.objects.get(id=technician_id)
+            content["technician"] = technician
+            appointment = Appointment.objects.create(**content)
+            return JsonResponse(
+                {"message": "Appointment created successfully", "appointment": appointment},
+                encoder=AppointmentListEncoder,
+                status=201
+            )
+        except KeyError as ke:
+            return JsonResponse(
+                {"error": f"Invalid JSON payload. Missing required field(s). {str(ke)}"},
+                status=400
+            )
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"error": "Technician with the specified ID does not exist."},
+                status=404
+            )
+        except Exception as e:
+            return JsonResponse(
+                {"error": f"Could not create the appointment. Error: {str(e)}"},
+                status=400
+            )
 
 
 @require_http_methods(["GET", "PUT", "DELETE"])

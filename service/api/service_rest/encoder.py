@@ -1,5 +1,6 @@
 from common.json import ModelEncoder
 from .models import AutomobileVO, Technician, Appointment
+from datetime import date, time
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
@@ -35,7 +36,7 @@ class AppointmentListEncoder(ModelEncoder):
         "id",
         "automobile_vin",
         "customer",
-        "appointment_date",
+        "Appointment_date",   # KEEP CAPS A
         "appointment_time",
         "technician",
         "reason",
@@ -46,13 +47,19 @@ class AppointmentListEncoder(ModelEncoder):
         "technician": TechnicianDetailEncoder(),
     }
 
+    def default(self, obj):
+        if isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        elif isinstance(obj, time):
+            return obj.strftime('%H:%M:%S')
+        return super().default(obj)
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "automobile_vin",
         "customer",
-        "appointment_date",
+        "Appointment_date",   # KEEP CAPS A
         "appointment_time",
         "technician",
         "reason",

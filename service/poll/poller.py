@@ -14,16 +14,26 @@ django.setup()
 from service_rest.models import AutomobileVO
 
 def get_autos():
-    response = requests.get('')
+    response = requests.get("http://inventory-api:8000/api/automobiles/")
+    print(response)
     content = json.loads(response.content)
-    print("STUFFS HAPPENING")
-    for auto in content["autos"]:
-        AutomobileVO.objects.update_or_create(
-            import_href=auto["href"],
+    print("WORKING")
+    for automobile in content["autos"]:
+        try:
+            obj, created = AutomobileVO.objects.update_or_create(
+            import_href=automobile["href"],
             defaults={
-                "vin": auto["vin"]
+                "vin": automobile["vin"],
+                "sold": automobile["sold"]
             },
         )
+            if created:
+                print("AutoVO obj created", obj)
+            else:
+                print("updated")
+        except:
+            print("didnt create")
+
 
 
 
@@ -35,6 +45,7 @@ def poll(repeat=True):
             # Write your polling logic, here
             # Do not copy entire file
             get_autos()
+            print("getting autos")
         except Exception as e:
             print(e, file=sys.stderr)
 

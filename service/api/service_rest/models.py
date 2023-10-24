@@ -15,7 +15,7 @@ class Technician(models.Model):
 class Appointment(models.Model):
     automobile_vin = models.CharField(max_length=50)
     customer = models.CharField(max_length=50)
-    Appointment_date = models.DateField(blank=True)
+    Appointment_date = models.DateField(blank=True)   # Yes, this should be lowercased, I tried to fix it however i couldnt migrate because of settings.DATABASES so i just adjusted rest of code
     appointment_time = models.TimeField()
     technician = models.ForeignKey(
         Technician,
