@@ -20,7 +20,7 @@ def get_autos():
     print("WORKING")
     for automobile in content["autos"]:
         try:
-            obj, created = AutomobileVO.objects.update_or_create(
+            obj, created = AutomobileVO.objects.update_or_create(                #DONT FORGET TO ASK SOMEONE ABOUT THIS
             import_href=automobile["href"],
             defaults={
                 "vin": automobile["vin"],

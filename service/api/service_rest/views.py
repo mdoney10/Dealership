@@ -128,3 +128,36 @@ def api_AutoVO(request):
     if request.method == "GET":
         autos = AutomobileVO.objects.all()
         return JsonResponse({"autos": autos}, encoder=AutomobileVOEncoder)
+    
+
+
+@require_http_methods(["PUT"])
+def api_cancel_appointment(request, id):
+    try:
+        appointment = Appointment.objects.get(id=id)
+        appointment.status = "canceled"
+        appointment.save()
+        return JsonResponse({"message": "Appointment canceled successfully"})
+    except Appointment.DoesNotExist:
+        return JsonResponse({"error": "Appointment not found"}, status=404)
+
+@require_http_methods(["PUT"])
+def api_finish_appointment(request, id):
+    try:
+        appointment = Appointment.objects.get(id=id)
+        appointment.status = "finished"
+        appointment.save()
+        return JsonResponse({"message": "Appointment finished successfully"})
+    except Appointment.DoesNotExist:
+        response = JsonResponse(
+            {"error": "Appointment with the specified ID does not exist"},
+            status=404
+        )
+        return response
+
+    except Exception as e:
+        response = JsonResponse(
+            {"error": f"Could not finish the appointment. Error: {str(e)}"},
+            status=400
+        )
+        return response
