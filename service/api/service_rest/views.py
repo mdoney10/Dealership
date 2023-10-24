@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from .models import Technician, Appointment, AutomobileVO
 from .encoder import (
@@ -55,6 +54,7 @@ def api_technician_detail(request, id):
                 {"error": "ID mismatch"},
                 status=400,
             )
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request):
@@ -128,7 +128,6 @@ def api_AutoVO(request):
     if request.method == "GET":
         autos = AutomobileVO.objects.all()
         return JsonResponse({"autos": autos}, encoder=AutomobileVOEncoder)
-    
 
 
 @require_http_methods(["PUT"])
@@ -140,6 +139,7 @@ def api_cancel_appointment(request, id):
         return JsonResponse({"message": "Appointment canceled successfully"})
     except Appointment.DoesNotExist:
         return JsonResponse({"error": "Appointment not found"}, status=404)
+
 
 @require_http_methods(["PUT"])
 def api_finish_appointment(request, id):
