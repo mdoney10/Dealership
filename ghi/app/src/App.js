@@ -6,6 +6,10 @@ import AppointmentForm from './AppointmentForm';
 import TechniciansList from './TechnicianList';
 import TechnicianForm from './TechnicianForm';
 import ServiceList from './ServiceHistory';
+import AutomobileForm from './AutomobileForm';
+import AutomobileList from './AutomobileList';
+import ModelList from './ModelList';
+import ModelForm from './ModelForm';
 
 
 function App() {
@@ -23,7 +27,15 @@ function App() {
             <Route index element={<TechniciansList />} />
             <Route path="new" element={<TechnicianForm />} />
           </Route>
-          <Route path="service" element={<ServiceList />}/>
+            <Route path="service" element={<ServiceList />}/>
+          <Route path="automobiles">
+            <Route index element={<AutomobileList />} />
+            <Route path="new" element={<AutomobileForm />} />
+          </Route>
+          <Route path="models">
+            <Route index element={<ModelList />} />
+            <Route path="new" element={<ModelForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
