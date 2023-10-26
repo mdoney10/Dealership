@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ListSales(props) {
-    console.log(props.sales)
+    
     return (
         <div>
             <h1>Sales List</h1>
