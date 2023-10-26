@@ -18,8 +18,6 @@ function Nav() {
             <li className="nav-item"><NavLink className="nav-link " aria-current="page" to="salesform">Add a sale</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link " aria-current="page" to="saleslist">Sales List</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link " aria-current="page" to="salespersonhistory">SalesPerson History</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link " aria-current="page" to="manufacturers">Manufacturers</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link " aria-current="page" to="/manufacturers/create">Create a Manufacturer</NavLink></li>
 
 
 
@@ -50,6 +48,9 @@ function Nav() {
             <li className="nav=item">
               <NavLink className="nav-link" to="/models/new">Create a Model</NavLink>
             </li>
+            <li className="nav-item"><NavLink className="nav-link " aria-current="page" to="manufacturers">Manufacturers</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link " aria-current="page" to="/manufacturers/create">Create a Manufacturer</NavLink></li>
+
           </ul>
         </div>
       </div>
