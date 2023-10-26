@@ -4,6 +4,8 @@ Team:
 
 * Person 1 - Which microservice?
 * Ehasan Shawan - Sales
+* Mason Doney - Service
+* Person 2 - Which microservice?
 
 ## Design
 
